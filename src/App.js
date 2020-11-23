@@ -16,7 +16,7 @@ function App() {
   const [mapCountries, setMapCountries] = useState([]);
   const [tableData, setTableData] = useState([]);
   const [casesType, setCasesType] = useState("cases");
-  const [mapCenter, setMapCenter] = useState({ lat: 34.80746, lng: -40.4796 });
+  const [mapCenter, setMapCenter] = useState({ lat: 55.3781, lng: -3.4360 });
   const [mapZoom, setMapZoom] = useState(3);
 
   useEffect(() => {
@@ -62,11 +62,13 @@ function App() {
       });
   };
 
+  console.log("...", countryInfo)
+
   return (
     <div className="app">
       <div className="app__left">
         <div className="app__header">
-          <h1>COVID-19 TRACKER</h1>
+          <h1 className="app__title">COVID-19 TRACKER</h1>
           <FormControl className="app__dropdown">
             <Select variant="outlined" value={country} onChange={onCountryChange}>
               <MenuItem value="worldwide">Worldwide</MenuItem>
