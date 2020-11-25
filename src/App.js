@@ -63,7 +63,7 @@ function App() {
         setInputCountry(countryCode);
         setGlobalInfo(data);
         countryCode === "worldwide" ? setMapCenter([34.8076, -40.4796]) : setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
-        setMapZoom(4);
+        setMapZoom(countryCode === "worldwide" ? 2.35 : 4);
       });
   };
 

@@ -89,8 +89,10 @@ export const LineGraph = ({ casesType }) => {
           data={{
             datasets: [
               {
-                backgroundColor: `${casesType === "recovered" ? "rgba(125, 215, 29, 0.5)" : "rgba(204, 16, 52, 0.5)"}`,
-                borderColor: `${casesType === "recovered" ? "#7dd71d" : "#CC1034"}`,
+                backgroundColor: `${casesType === "recovered" ? "rgba(125, 215, 29, 0.5)" : `${casesType === "cases" ? "rgba(204, 16, 52, 0.5)" : "rgba(251, 68, 67, 0.5)"}`}`,
+                borderColor: `${casesType === "recovered" ? "#7dd71d" : `${casesType === "cases" ? "#CC1034" : "#fb4443"}`}`,
+                //backgroundColor: `${casesType === "recovered" ? "rgba(125, 215, 29, 0.5)" : "rgba(204, 16, 52, 0.5)"}`,
+                //borderColor: `${casesType === "recovered" ? "#7dd71d" : "#CC1034"}`,
                 //backgroundColor: "rgba(204, 16, 52, 0.5)",
                 //borderColor: "#CC1034",
                 data: data,
