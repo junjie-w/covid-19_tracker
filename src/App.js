@@ -10,19 +10,24 @@ import numeral from "numeral";
 import "leaflet/dist/leaflet.css";
 
 function App() {
-  const [country, setInputCountry] = useState("worldwide");
-  const [countryInfo, setCountryInfo] = useState({});
+  const [globalInfo, setGlobalInfo] = useState({});
   const [countries, setCountries] = useState([]);
+  const [country, setInputCountry] = useState("worldwide");
   const [mapCountries, setMapCountries] = useState([]);
   const [tableData, setTableData] = useState([]);
   const [casesType, setCasesType] = useState("cases");
-  const [mapCenter, setMapCenter] = useState({ lat: 55.3781, lng: -3.4360 });
-  const [mapZoom, setMapZoom] = useState(3);
+  //const [mapCenter, setMapCenter] = useState({ lat: 55.3781, lng: -3.4360 });
+  const [mapCenter, setMapCenter] = useState({ lat: 34.80746, lng: -40.4796 });
+  //const [mapZoom, setMapZoom] = useState(3);
+  const [mapZoom, setMapZoom] = useState(2.35);
 
   useEffect(() => {
-    fetch("https://disease.sh/v3/covid-19/all")
-      .then(response => response.json())
-      .then(data => setCountryInfo(data));
+    const getGlobalData = async () => {
+      fetch("https://disease.sh/v3/covid-19/all")
+        .then(response => response.json())
+        .then(data => setGlobalInfo(data));
+    }
+    getGlobalData();
   }, []);
 
   useEffect(() => {
@@ -30,13 +35,13 @@ function App() {
       fetch("https://disease.sh/v3/covid-19/countries")
         .then((response) => response.json())
         .then((data) => {
-          const countries = data.map((country) => ({
+          const countries = data.map(country => ({
             name: country.country,
             value: country.countryInfo.iso2,
           }));
           setCountries(countries);
-          let sortedData = sortData(data);
           setMapCountries(data);
+          let sortedData = sortData(data);
           setTableData(sortedData);
         });
     };
@@ -56,13 +61,13 @@ function App() {
       .then((response) => response.json())
       .then((data) => {
         setInputCountry(countryCode);
-        setCountryInfo(data);
-        setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
+        setGlobalInfo(data);
+        countryCode === "worldwide" ? setMapCenter([34.8076, -40.4796]) : setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
         setMapZoom(4);
       });
   };
 
-  console.log("...", countryInfo)
+  console.log("GlobalInfo >>>", globalInfo)
 
   return (
     <div className="app">
@@ -80,27 +85,27 @@ function App() {
         </div>
         <div className="app__stats">
           <InfoBox
-            onClick={(e) => setCasesType("cases")}
+            onClick={e => setCasesType("cases")}
             title="Coronavirus Cases"
             isRed
             active={casesType === "cases"}
-            cases={prettyPrintStat(countryInfo.todayCases)}
-            total={numeral(countryInfo.cases).format("0.0a")}
+            cases={prettyPrintStat(globalInfo.todayCases)}
+            total={numeral(globalInfo.cases).format("0.0a")}
           />
           <InfoBox
-            onClick={(e) => setCasesType("recovered")}
+            onClick={e => setCasesType("recovered")}
             title="Recovered"
             active={casesType === "recovered"}
-            cases={prettyPrintStat(countryInfo.todayRecovered)}
-            total={numeral(countryInfo.recovered).format("0.0a")}
+            cases={prettyPrintStat(globalInfo.todayRecovered)}
+            total={numeral(globalInfo.recovered).format("0.0a")}
           />
           <InfoBox
-            onClick={(e) => setCasesType("deaths")}
+            onClick={e => setCasesType("deaths")}
             title="Deaths"
             isRed
             active={casesType === "deaths"}
-            cases={prettyPrintStat(countryInfo.todayDeaths)}
-            total={numeral(countryInfo.deaths).format("0.0a")}
+            cases={prettyPrintStat(globalInfo.todayDeaths)}
+            total={numeral(globalInfo.deaths).format("0.0a")}
           />
         </div>
         <Map
@@ -115,7 +120,7 @@ function App() {
           <div className="app__information">
             <h3>Live Cases by Country</h3>
             <Table countries={tableData} />
-            <h3>Worldwide new {casesType}</h3>
+            <h3 className="lineGraphTitle">Worldwide new {casesType}</h3>
             <LineGraph casesType={casesType} />
           </div>
         </CardContent>

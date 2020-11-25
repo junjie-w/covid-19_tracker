@@ -72,14 +72,13 @@ export const LineGraph = ({ casesType }) => {
         .then((response) => {
           return response.json();
         })
-        .then((data) => {
+        .then(data => {
           let chartData = buildChartData(data, casesType);
           setData(chartData);
           console.log(chartData);
           // buildChart(chartData);
         });
     };
-
     fetchData();
   }, [casesType]);
 
@@ -90,8 +89,10 @@ export const LineGraph = ({ casesType }) => {
           data={{
             datasets: [
               {
-                backgroundColor: "rgba(204, 16, 52, 0.5)",
-                borderColor: "#CC1034",
+                backgroundColor: `${casesType === "recovered" ? "rgba(125, 215, 29, 0.5)" : "rgba(204, 16, 52, 0.5)"}`,
+                borderColor: `${casesType === "recovered" ? "#7dd71d" : "#CC1034"}`,
+                //backgroundColor: "rgba(204, 16, 52, 0.5)",
+                //borderColor: "#CC1034",
                 data: data,
               },
             ],
