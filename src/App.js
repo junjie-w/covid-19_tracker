@@ -20,6 +20,7 @@ function App() {
   //const [mapCenter, setMapCenter] = useState({ lat: 34.80746, lng: -40.4796 });
   //const [mapCenter, setMapCenter] = useState({ lat: 51.4934, lng: 0.0098 });
   const [mapCenter, setMapCenter] = useState({ lat: 34.80746, lng: -40.4796 });
+  //const [mapCenter, setMapCenter] = useState({ lat: 34.80746, lng: 0.0098 });
   //const [mapZoom, setMapZoom] = useState(3);
   //const [mapZoom, setMapZoom] = useState(3.5);
   const [mapZoom, setMapZoom] = useState(2.35);
@@ -128,10 +129,10 @@ function App() {
       <Card className="app__right">
         <CardContent>
           <div className="app__information">
+            <h3 className="lineGraphTitle">Worldwide New {casesType.charAt(0).toUpperCase() + casesType.slice(1)}</h3>
+            <LineGraph casesType={casesType} />
             <h3 className="tableTitle">Live Cases by Country</h3>
             <Table countries={tableData} />
-            <h3 className="lineGraphTitle">Worldwide new {casesType}</h3>
-            <LineGraph casesType={casesType} />
           </div>
         </CardContent>
       </Card>
