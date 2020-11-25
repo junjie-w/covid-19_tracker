@@ -9,6 +9,7 @@ body {
 .app {
   display: flex;
   justify-content: space-evenly;
+  /*justify-content: space-around;*/
   background-color: #f5f6fa;
   padding: 20px;
 }
@@ -42,6 +43,10 @@ body {
   flex: 0.9;
 }
 
+/*.app__right {
+  flex: 0.3;
+}*/
+
 .app__information > h3 {
   color: #6a5d5d;
   font-weight: 400;
@@ -50,7 +55,13 @@ body {
 }
 
 .app__information > h3:last-of-type {
-  margin-top: 3rem;
+  margin-top: 2.75rem;
+  margin-bottom: 2.35rem;
+}
+
+.app__information > h3:first-of-type {
+  /*margin-top: 0.5rem;*/
+  margin-bottom: 1.5rem;
 }
 
 /*.MuiCard-root.app__right {
