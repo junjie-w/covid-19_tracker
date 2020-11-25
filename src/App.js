@@ -18,8 +18,9 @@ function App() {
   const [casesType, setCasesType] = useState("cases");
   //const [mapCenter, setMapCenter] = useState({ lat: 55.3781, lng: -3.4360 });
   const [mapCenter, setMapCenter] = useState({ lat: 34.80746, lng: -40.4796 });
+  //const [mapCenter, setMapCenter] = useState({ lat: 51.4934, lng: 0.0098 });
   //const [mapZoom, setMapZoom] = useState(3);
-  const [mapZoom, setMapZoom] = useState(2.35);
+  const [mapZoom, setMapZoom] = useState(3.5);
 
   useEffect(() => {
     const getGlobalData = async () => {
@@ -63,7 +64,8 @@ function App() {
         setInputCountry(countryCode);
         setGlobalInfo(data);
         countryCode === "worldwide" ? setMapCenter([34.8076, -40.4796]) : setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
-        setMapZoom(countryCode === "worldwide" ? 2.35 : 4);
+        //setMapCenter(countryCode === "worldwide" ? [34.80746, -40.4796] : [data.countryInfo.lat, data.countryInfo.long]) && setMapZoom(countryCode === "worldwide" ? 2.35 : 3.5);
+        countryCode === "worldwide" ? setMapZoom(2.35) : setMapZoom(3.5);
       });
   };
 
