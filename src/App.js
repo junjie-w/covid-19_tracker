@@ -17,10 +17,13 @@ function App() {
   const [tableData, setTableData] = useState([]);
   const [casesType, setCasesType] = useState("cases");
   //const [mapCenter, setMapCenter] = useState({ lat: 55.3781, lng: -3.4360 });
-  const [mapCenter, setMapCenter] = useState({ lat: 34.80746, lng: -40.4796 });
+  //const [mapCenter, setMapCenter] = useState({ lat: 34.80746, lng: -40.4796 });
   //const [mapCenter, setMapCenter] = useState({ lat: 51.4934, lng: 0.0098 });
+  const [mapCenter, setMapCenter] = useState({ lat: 34.80746, lng: -40.4796 });
   //const [mapZoom, setMapZoom] = useState(3);
-  const [mapZoom, setMapZoom] = useState(3.5);
+  //const [mapZoom, setMapZoom] = useState(3.5);
+  const [mapZoom, setMapZoom] = useState(2.35);
+  //const [flyTo, setFlyTo] = useState([34.8076, -40.4796])
 
   useEffect(() => {
     const getGlobalData = async () => {
@@ -34,13 +37,14 @@ function App() {
   useEffect(() => {
     const getCountriesData = async () => {
       fetch("https://disease.sh/v3/covid-19/countries")
-        .then((response) => response.json())
-        .then((data) => {
-          const countries = data.map(country => ({
+        .then(response => response.json())
+        .then(data => {
+          const dataCountries = data.map(country => ({
             name: country.country,
             value: country.countryInfo.iso2,
           }));
-          setCountries(countries);
+          const filteredCountries = dataCountries.filter(country => country.value !== null);
+          setCountries(filteredCountries);
           setMapCountries(data);
           let sortedData = sortData(data);
           setTableData(sortedData);
@@ -63,9 +67,10 @@ function App() {
       .then((data) => {
         setInputCountry(countryCode);
         setGlobalInfo(data);
-        countryCode === "worldwide" ? setMapCenter([34.8076, -40.4796]) : setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
+        countryCode === "worldwide" ? setMapCenter([34.80746, 0.0098]) : setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
         //setMapCenter(countryCode === "worldwide" ? [34.80746, -40.4796] : [data.countryInfo.lat, data.countryInfo.long]) && setMapZoom(countryCode === "worldwide" ? 2.35 : 3.5);
-        countryCode === "worldwide" ? setMapZoom(2.35) : setMapZoom(3.5);
+        countryCode === "worldwide" ? setMapZoom(2.35) : setMapZoom(3.785);
+        //setFlyTo(countryCode === "worldwide" ? [34.8076, -40.4796] : [data.countryInfo.lat, data.countryInfo.long], countryCode === "worldwide" ? 2.35 : 3.5)
       });
   };
 
@@ -89,7 +94,8 @@ function App() {
           <InfoBox
             onClick={e => setCasesType("cases")}
             title="Coronavirus Cases"
-            isRed
+            //isRed
+            covidCases
             active={casesType === "cases"}
             cases={prettyPrintStat(globalInfo.todayCases)}
             total={numeral(globalInfo.cases).format("0.0a")}
@@ -97,6 +103,7 @@ function App() {
           <InfoBox
             onClick={e => setCasesType("recovered")}
             title="Recovered"
+            recovered
             active={casesType === "recovered"}
             cases={prettyPrintStat(globalInfo.todayRecovered)}
             total={numeral(globalInfo.recovered).format("0.0a")}
@@ -104,7 +111,8 @@ function App() {
           <InfoBox
             onClick={e => setCasesType("deaths")}
             title="Deaths"
-            isRed
+            //isRed
+            deaths
             active={casesType === "deaths"}
             cases={prettyPrintStat(globalInfo.todayDeaths)}
             total={numeral(globalInfo.deaths).format("0.0a")}

@@ -32,8 +32,50 @@
   margin-top: 15px !important;
 }
 
+.infoBox__cases__text {
+  /*color: rgba(204, 16, 52, 0.5);*/
+  color: rgb(204, 16, 52);
+}
+
+.infoBox__cases__border {
+  /*border-color: rgb(204, 16, 52);*/
+  border-color: rgba(204, 16, 52, 0.75);
+}
+
+.infoBox__recovered__text {
+  /*color: rgba(125, 215, 29, 0.5);*/
+  color: rgb(125, 215, 29);
+}
+
+.infoBox__recovered__border {
+  /*border-color: rgb(125, 215, 29);*/
+  border-color: rgba(125, 215, 29, 0.75);
+}
+
+.infoBox__deaths__text {
+  /*color: rgba(251, 68, 67, 0.5);*/
+  color: rgb(251, 68, 67);
+}
+
+.infoBox__deaths__border {
+  /*border-color: rgb(251, 68, 67);*/
+  border-color: rgba(251, 68, 67, 0.75);
+}
+
 @media (max-width: 415px) {
   .infoBox__cases {
     font-size: 1.35rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .MuiTypography-body1 {
+    font-size: 0.8rem !important;
+  }
+}
+
+@media (max-width: 320px) {
+  .infoBox__cases {
+    font-size: 1.2rem;
   }
 }
