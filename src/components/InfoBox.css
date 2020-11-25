@@ -62,6 +62,10 @@
   border-color: rgba(251, 68, 67, 0.75);
 }
 
+/*.MuiTypography-body1 {
+  margin-top: 0.185rem !important;
+}*/
+
 @media (max-width: 415px) {
   .infoBox__cases {
     font-size: 1.35rem;
@@ -71,6 +75,7 @@
 @media (max-width: 380px) {
   .MuiTypography-body1 {
     font-size: 0.8rem !important;
+    margin-top: 0.5rem !important;
   }
 }
 
