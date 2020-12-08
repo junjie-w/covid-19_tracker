@@ -1,3 +1,16 @@
+# Covid-19 Tracker
+=======
+
+#### Built with React.js and disease.sh API.
+
+<hr>
+<br>
+<p align="center">
+<img src="/public/images/covid-19-tracker.png" width="780px" height="auto">
+</p>
+<br>
+<hr>
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
