@@ -6,7 +6,7 @@
 <hr>
 <br>
 <p align="center">
-<img src="/public/images/covid-19-tracker.png" width="780px" height="auto">
+<img src="/public/images/covid-19_tracker.png" width="780px" height="auto">
 </p>
 <br>
 <hr>
