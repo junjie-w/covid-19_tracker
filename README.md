@@ -1,7 +1,7 @@
 # Covid-19 Tracker
 =======
 
-#### Built with React.js and disease.sh API.
+### Built with React.js and disease.sh API.
 
 <hr>
 <br>
